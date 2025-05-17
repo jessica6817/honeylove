@@ -59,7 +59,7 @@ h1 {
 }
 
 .female .option-button:hover {
-  background-color: #ff8da1;
+  background-color: #ff6b8b;
 }
 
 .male .option-button {
@@ -68,7 +68,7 @@ h1 {
 }
 
 .male .option-button:hover {
-  background-color: #5f9eb3;
+  background-color: #4682b4;
 }
 
 #next-button {
@@ -213,8 +213,16 @@ h1 {
 }
 
 .selected {
-  opacity: 0.7;
+  opacity: 1;
   pointer-events: none;
+}
+
+.female .selected {
+  background-color: #ff6b8b !important;
+}
+
+.male .selected {
+  background-color: #4682b4 !important;
 }
 
 .analysis {
