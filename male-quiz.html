@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>戀愛測驗</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="male">
+  <div class="quiz-container">
+    <h1>戀愛中，你是哪種型男？</h1>
+    <div id="question-container">
+      <!-- 顯示問題會動態生成 -->
+    </div>
+    <button id="next-button" onclick="nextQuestion()">下一題</button>
+    <div id="result-container" class="result-container">
+      <h2>測驗結果</h2>
+      <p id="result-text"></p>
+    </div>
+  </div>
+
+  <script>
+    const questions = {
+      male: [
+        { question: "如果她跟異性走太近，你會？", options: ["假裝不在意，心裡卻翻滾", "私下問她是不是有事隱瞞我", "給她自由，相信她", "一起玩就好，大家朋友嘛！", "默默難過但不敢說出口"] },
+        { question: "你對戀愛的定義是？", options: ["兩人永遠不分離", "互相包容，彼此理解", "互相依賴，無所不談", "兩人一起冒險，嘗試新事物", "彼此信任，獨立卻默契"] },
+        { question: "你認為戀愛中最重要的是？", options: ["安全感", "共同未來", "愛的表達", "一起玩樂", "真心和尊重"] },
+        { question: "如果你跟她的關係陷入低潮期，你會？", options: ["重新燃起浪漫", "深入溝通並解決問題", "嘗試更貼心的關懷", "給彼此時間和空間", "默默支持，耐心等待"] },
+        { question: "你最喜歡怎麼告白？", options: ["做一個驚喜的浪漫計畫", "直接坦誠告訴她我的心意", "溫柔地表達我對她的情感", "用行動讓她感受到我的心", "透過簡單的行為讓她感到特別"] },
+        { question: "戀愛中的你，最容易為她做什麼？", options: ["挑戰自己，變得更好", "做一切讓她開心的事", "照顧她的每一個需求", "帶她一起去冒險", "讓她感到舒適和安心"] },
+        { question: "你喜歡她怎麼對你表達愛意？", options: ["給我小小的驚喜", "透過行動顯示她的關心", "用甜言蜜語表達愛意", "一起做些有趣的事", "用行為展現她的愛"] },
+        { question: "最浪漫的約會是？", options: ["一起吃晚餐，品味彼此心情", "一起去旅行，享受未知的樂趣", "在海邊散步，感受海風", "在家看電影，享受溫馨時光", "一起完成一個目標"] },
+        { question: "在她難過時，你會怎麼做？", options: ["給她擁抱，讓她感到安心", "安靜地陪著她，不多說話", "告訴她一切會好起來的", "想辦法讓她開心", "給她空間，但不會離開"] }
+      ]
+    };
+
+    const results = {
+      male: [
+        { 
+          type: "🍯 蜜糖舒芙蕾", 
+          description: "溫柔體貼，做什麼都想到對方。你像蜜糖舒芙蕾一樣，給人甜蜜溫暖的感覺。在戀愛中，你總是為對方著想，願意付出關心和照顧。你的體貼讓對方感到被重視和珍惜。",
+          match: "🍓 草莓奶油卷 - 她會用浪漫的方式回應你的溫柔體貼",
+          notMatch: "🍫 黑巧克力塔 - 她的理性可能會讓你覺得不夠溫暖",
+          image: "images/honey_souffle.jpg"
+        },
+        { 
+          type: "🍫 苦甜可可磚", 
+          description: "冷靜理性，喜歡掌控，追求穩定關係。你像苦甜可可磚一樣，有著成熟的魅力。在戀愛中，你保持理性，喜歡掌控局面，追求穩定的感情。你的可靠讓對方感到安心。",
+          match: "🍫 黑巧克力塔 - 你們都理性且追求穩定，能互相理解",
+          notMatch: "🍬 棉花糖泡泡 - 她的依賴可能會讓你感到壓力",
+          image: "images/chocolate_brick.jpg"
+        },
+        { 
+          type: "🍩 甜甜圈男孩", 
+          description: "活潑陽光，喜歡放閃，戀愛像冒險遊戲。你像甜甜圈一樣，充滿活力和樂趣。在戀愛中，你喜歡製造驚喜，讓感情充滿趣味。你的陽光特質讓對方感到快樂。",
+          match: "🍬 棉花糖泡泡 - 她會用撒嬌可愛的方式回應你的活潑",
+          notMatch: "🍵 抹茶千層 - 她的慢熟可能會讓你覺得不夠熱情",
+          image: "images/donut.jpg"
+        },
+        { 
+          type: "🍮 牛奶布丁", 
+          description: "可愛內向，慢熟型，會默默付出。你像牛奶布丁一樣，溫柔細膩。在戀愛中，你雖然內向，但會默默付出關心。你的細心讓對方感到溫暖。",
+          match: "🍪 曲奇餅乾 - 你們都願意默默付出，能建立穩定的感情",
+          notMatch: "🍩 甜甜圈男孩 - 他的活潑可能會讓你感到壓力",
+          image: "images/pudding.jpg"
+        },
+        { 
+          type: "🍎 焦糖蘋果派", 
+          description: "外冷內熱，看似不在意，其實很容易吃醋。你像焦糖蘋果派一樣，外表冷靜但內心熱情。在戀愛中，你雖然表現得不太在意，但其實很在乎對方。你的反差萌讓感情更有趣。",
+          match: "🍵 抹茶千層 - 你們都重視心靈交流，能建立深厚的默契",
+          notMatch: "🍪 曲奇餅乾 - 她的踏實可能會讓你覺得不夠刺激",
+          image: "images/apple_pie.jpg"
+        }
+      ]
+    };
+
+    const gender = 'male';
+    const questionsList = questions[gender];
+    let currentQuestion = 0;
+    let answers = [];
+
+    function loadQuestion() {
+      const questionElement = document.getElementById("question-container");
+      const questionData = questionsList[currentQuestion];
+      const nextButton = document.getElementById("next-button");
+
+      questionElement.innerHTML = `
+        <p>${questionData.question}</p>
+        ${questionData.options.map((option, index) => 
+          `<button class="option-button" onclick="selectAnswer(${index})">${option}</button>`
+        ).join('')}
+      `;
+      nextButton.style.display = 'none';
+    }
+
+    function selectAnswer(index) {
+      const buttons = document.querySelectorAll('.option-button');
+      buttons.forEach(button => button.classList.remove('selected'));
+      buttons[index].classList.add('selected');
+      
+      answers[currentQuestion] = index;
+      document.getElementById("next-button").style.display = 'block';
+    }
+
+    function nextQuestion() {
+      if (currentQuestion < questionsList.length - 1) {
+        currentQuestion++;
+        loadQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function analyzeChoices() {
+      const analysis = {
+        caring: 0,      // 照顧傾向
+        rational: 0,    // 理性傾向
+        adventurous: 0, // 冒險傾向
+        gentle: 0,      // 溫柔傾向
+        reserved: 0     // 內斂傾向
+      };
+
+      // 分析每個答案
+      answers.forEach((answer, index) => {
+        switch(index) {
+          case 0: // 異性走太近
+            if (answer === 0) analysis.reserved++;
+            else if (answer === 1) analysis.rational++;
+            else if (answer === 2) analysis.gentle++;
+            else if (answer === 3) analysis.adventurous++;
+            else analysis.caring++;
+            break;
+          case 1: // 戀愛定義
+            if (answer === 0) analysis.caring++;
+            else if (answer === 1) analysis.rational++;
+            else if (answer === 2) analysis.gentle++;
+            else if (answer === 3) analysis.adventurous++;
+            else analysis.reserved++;
+            break;
+          case 2: // 最重要的事
+            if (answer === 0) analysis.caring++;
+            else if (answer === 1) analysis.rational++;
+            else if (answer === 2) analysis.gentle++;
+            else if (answer === 3) analysis.adventurous++;
+            else analysis.reserved++;
+            break;
+          case 3: // 低潮期
+            if (answer === 0) analysis.adventurous++;
+            else if (answer === 1) analysis.rational++;
+            else if (answer === 2) analysis.caring++;
+            else if (answer === 3) analysis.reserved++;
+            else analysis.gentle++;
+            break;
+          case 4: // 告白方式
+            if (answer === 0) analysis.adventurous++;
+            else if (answer === 1) analysis.rational++;
+            else if (answer === 2) analysis.gentle++;
+            else if (answer === 3) analysis.caring++;
+            else analysis.reserved++;
+            break;
+          case 5: // 為她做的事
+            if (answer === 0) analysis.rational++;
+            else if (answer === 1) analysis.caring++;
+            else if (answer === 2) analysis.gentle++;
+            else if (answer === 3) analysis.adventurous++;
+            else analysis.reserved++;
+            break;
+          case 6: // 喜歡的表達方式
+            if (answer === 0) analysis.adventurous++;
+            else if (answer === 1) analysis.caring++;
+            else if (answer === 2) analysis.gentle++;
+            else if (answer === 3) analysis.rational++;
+            else analysis.reserved++;
+            break;
+          case 7: // 浪漫約會
+            if (answer === 0) analysis.gentle++;
+            else if (answer === 1) analysis.adventurous++;
+            else if (answer === 2) analysis.caring++;
+            else if (answer === 3) analysis.reserved++;
+            else analysis.rational++;
+            break;
+          case 8: // 難過時
+            if (answer === 0) analysis.caring++;
+            else if (answer === 1) analysis.reserved++;
+            else if (answer === 2) analysis.rational++;
+            else if (answer === 3) analysis.adventurous++;
+            else analysis.gentle++;
+            break;
+        }
+      });
+
+      // 找出最高分的特質
+      const maxTrait = Object.entries(analysis).reduce((a, b) => a[1] > b[1] ? a : b)[0];
+      
+      // 生成分析文字
+      let analysisText = "你的選擇分析：<br>";
+      analysisText += `<strong>主要特質：</strong>${getTraitDescription(maxTrait)}<br>`;
+      analysisText += "<strong>特質分布：</strong><br>";
+      
+      // 按分數排序並顯示所有特質
+      Object.entries(analysis)
+        .sort((a, b) => b[1] - a[1])
+        .forEach(([trait, score]) => {
+          const percentage = (score / answers.length) * 100;
+          analysisText += `
+            <div class="trait-label">
+              <span class="trait-name">${getTraitName(trait)}</span>
+              <span class="trait-percentage">${percentage.toFixed(0)}%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                   style="width: ${percentage}%;" 
+                   role="progressbar" 
+                   aria-valuenow="${percentage}" 
+                   aria-valuemin="0" 
+                   aria-valuemax="100">
+                ${percentage.toFixed(0)}%
+              </div>
+            </div>
+          `;
+        });
+
+      return analysisText;
+    }
+
+    function getTraitName(trait) {
+      const names = {
+        caring: "照顧特質",
+        rational: "理性特質",
+        adventurous: "冒險特質",
+        gentle: "溫柔特質",
+        reserved: "內斂特質"
+      };
+      return names[trait];
+    }
+
+    function getTraitDescription(trait) {
+      const descriptions = {
+        caring: "你傾向於照顧對方，願意付出關心和體貼，是個溫暖的伴侶。",
+        rational: "你習慣用理性的方式處理感情，善於分析問題並找到解決方案。",
+        adventurous: "你喜歡帶給對方新鮮感，願意嘗試新事物，讓感情充滿樂趣。",
+        gentle: "你溫柔細膩，善於表達情感，能給對方安全感。",
+        reserved: "你較為內斂，不輕易表達情感，但內心深處很在乎對方。"
+      };
+      return descriptions[trait];
+    }
+
+    function showResult() {
+      const questionContainer = document.getElementById("question-container");
+      const nextButton = document.getElementById("next-button");
+      const resultContainer = document.getElementById("result-container");
+      const resultText = document.getElementById("result-text");
+
+      questionContainer.style.display = 'none';
+      nextButton.style.display = 'none';
+      resultContainer.style.display = 'block';
+
+      // 計算結果
+      const resultIndex = Math.floor(Math.random() * results[gender].length);
+      const result = results[gender][resultIndex];
+      
+      resultText.innerHTML = `
+        <div class="personality-header">
+          <img src="${result.image}" alt="${result.type}" class="personality-image">
+          <div class="personality-title">
+            <span class="personality-emoji">${result.type.split(' ')[0]}</span>
+            <h3>${result.type.split(' ')[1]}</h3>
+          </div>
+        </div>
+        <p>${result.description}</p>
+        <div class="compatibility">
+          <div class="compatibility-section">
+            <h4>💕 最適合的配對</h4>
+            <img src="${result.match.split(' - ')[0].split(' ')[1] === '草莓奶油卷' ? 'images/strawberry_roll.jpg' : 
+                      result.match.split(' - ')[0].split(' ')[1] === '棉花糖泡泡' ? 'images/cotton_candy.jpg' :
+                      result.match.split(' - ')[0].split(' ')[1] === '黑巧克力塔' ? 'images/chocolate_tart.jpg' :
+                      result.match.split(' - ')[0].split(' ')[1] === '曲奇餅乾' ? 'images/cookie.jpg' :
+                      'images/matcha_cake.jpg'}" 
+                 alt="${result.match.split(' - ')[0]}" 
+                 class="match-image">
+            <div class="match-info">
+              <div class="match-type">${result.match.split(' - ')[0]}</div>
+              <div class="match-description">${result.match.split(' - ')[1]}</div>
+            </div>
+          </div>
+          <div class="compatibility-section">
+            <h4>⚠️ 需要多溝通的配對</h4>
+            <img src="${result.notMatch.split(' - ')[0].split(' ')[1] === '草莓奶油卷' ? 'images/strawberry_roll.jpg' : 
+                      result.notMatch.split(' - ')[0].split(' ')[1] === '棉花糖泡泡' ? 'images/cotton_candy.jpg' :
+                      result.notMatch.split(' - ')[0].split(' ')[1] === '黑巧克力塔' ? 'images/chocolate_tart.jpg' :
+                      result.notMatch.split(' - ')[0].split(' ')[1] === '曲奇餅乾' ? 'images/cookie.jpg' :
+                      'images/matcha_cake.jpg'}" 
+                 alt="${result.notMatch.split(' - ')[0]}" 
+                 class="match-image">
+            <div class="match-info">
+              <div class="match-type">${result.notMatch.split(' - ')[0]}</div>
+              <div class="match-description">${result.notMatch.split(' - ')[1]}</div>
+            </div>
+          </div>
+        </div>
+        <div class="analysis">
+          <h4>📊 選擇分析</h4>
+          <p>${analyzeChoices()}</p>
+        </div>
+      `;
+    }
+
+    // 初始化頁面
+    document.body.className = gender;
+    loadQuestion();
+  </script>
+</body>
+</html>

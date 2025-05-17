@@ -1,0 +1,589 @@
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 2rem;
+  text-align: center;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body.female {
+  background-color: #fff0f5;
+}
+
+body.male {
+  background-color: #f0f8ff;
+}
+
+.quiz-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+#question-container {
+  margin-bottom: 2rem;
+}
+
+#question-container p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.option-button {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.female .option-button {
+  background-color: #ffb6c1;
+  color: white;
+}
+
+.female .option-button:hover {
+  background-color: #ff8da1;
+}
+
+.male .option-button {
+  background-color: #87ceeb;
+  color: white;
+}
+
+.male .option-button:hover {
+  background-color: #5f9eb3;
+}
+
+#next-button {
+  display: none;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem 2rem;
+  margin: 1rem auto;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.female #next-button {
+  background-color: #ffb6c1;
+}
+
+.female #next-button:hover {
+  background-color: #ff8da1;
+}
+
+.male #next-button {
+  background-color: #87ceeb;
+}
+
+.male #next-button:hover {
+  background-color: #5f9eb3;
+}
+
+.result-container {
+  display: none;
+  padding: 2rem;
+}
+
+.result-container h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.result-container h3 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.result-container p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.compatibility {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  display: flex;
+  gap: 20px;
+}
+
+.compatibility-section {
+  flex: 1;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.compatibility-section h4 {
+  color: #333;
+  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.female .compatibility-section h4:first-child {
+  color: #e83e8c;
+}
+
+.female .compatibility-section h4:last-child {
+  color: #e83e8c;
+}
+
+.male .compatibility-section h4:first-child {
+  color: #4682b4;
+}
+
+.male .compatibility-section h4:last-child {
+  color: #4682b4;
+}
+
+.match-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 10px;
+  display: block;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.female .match-image {
+  border-color: #ffb6c1;
+}
+
+.male .match-image {
+  border-color: #87ceeb;
+}
+
+.match-info {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.match-type {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.match-description {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+.compatibility p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.selected {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.analysis {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.female .analysis {
+  border-left: 4px solid #ffb6c1;
+}
+
+.male .analysis {
+  border-left: 4px solid #87ceeb;
+}
+
+.analysis h4 {
+  color: #666;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+.female .analysis h4 {
+  color: #e83e8c;
+}
+
+.male .analysis h4 {
+  color: #4682b4;
+}
+
+.analysis p {
+  line-height: 1.6;
+  color: #444;
+}
+
+.analysis strong {
+  color: #666;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.progress {
+  height: 20px;
+  margin: 10px 0;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.progress-bar {
+  float: left;
+  width: 0;
+  height: 100%;
+  font-size: 12px;
+  line-height: 20px;
+  color: #fff;
+  text-align: center;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  transition: width 0.6s ease;
+}
+
+.progress-bar-striped {
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-size: 40px 40px;
+}
+
+.progress-bar-animated {
+  animation: progress-bar-stripes 2s linear infinite;
+}
+
+@keyframes progress-bar-stripes {
+  from { background-position: 40px 0; }
+  to { background-position: 0 0; }
+}
+
+.female .progress-bar {
+  background-color: #ffb6c1;
+}
+
+.male .progress-bar {
+  background-color: #87ceeb;
+}
+
+.trait-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.trait-name {
+  font-weight: bold;
+}
+
+.female .trait-name {
+  color: #e83e8c;
+}
+
+.male .trait-name {
+  color: #4682b4;
+}
+
+.trait-percentage {
+  font-weight: bold;
+}
+
+.female .trait-percentage {
+  color: #e83e8c;
+}
+
+.male .trait-percentage {
+  color: #4682b4;
+}
+
+/* 特質分布條 */
+.trait-bar {
+  background-color: #f0f0f0;
+  height: 8px;
+  border-radius: 4px;
+  margin: 5px 0;
+  overflow: hidden;
+}
+
+.trait-bar-fill {
+  height: 100%;
+  background-color: #ffb6c1;
+  transition: width 0.3s ease;
+}
+
+body.male .trait-bar-fill {
+  background-color: #87ceeb;
+}
+
+.personality-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 3px solid #fff;
+}
+
+.female .personality-image {
+  border-color: #ffb6c1;
+}
+
+.male .personality-image {
+  border-color: #87ceeb;
+}
+
+.personality-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.personality-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.personality-emoji {
+  font-size: 2rem;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.container h1 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.container p {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.container button {
+  padding: 1rem 2rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+/* 女生按鈕樣式 */
+.container button[onclick="selectGender('female')"] {
+  background-color: #ffb6c1;
+}
+
+.container button[onclick="selectGender('female')"]:hover {
+  background-color: #ff8da1;
+}
+
+/* 男生按鈕樣式 */
+.container button[onclick="selectGender('male')"] {
+  background-color: #87ceeb;
+}
+
+.container button[onclick="selectGender('male')"]:hover {
+  background-color: #5f9eb3;
+}
+
+.waving-girl,
+.waving-boy {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.waving-girl {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffb6c1"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>');
+  right: -50px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.waving-boy {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2387ceeb"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>');
+  left: -50px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.button-wrapper:hover .waving-girl {
+  opacity: 1;
+  right: -60px;
+  animation: wave 1s infinite;
+}
+
+.button-wrapper:hover .waving-boy {
+  opacity: 1;
+  left: -60px;
+  animation: wave 1s infinite;
+}
+
+@keyframes wave {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  25% { transform: translateY(-50%) rotate(20deg); }
+  50% { transform: translateY(-50%) rotate(0deg); }
+  75% { transform: translateY(-50%) rotate(-20deg); }
+  100% { transform: translateY(-50%) rotate(0deg); }
+}
+
+/* 手機版樣式 (小於 768px) */
+@media screen and (max-width: 767px) {
+  body {
+    padding: 1rem;
+  }
+
+  .container {
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+
+  .container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .container p {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .container button {
+    width: 100%;
+    margin: 0.5rem 0;
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+
+  .waving-girl,
+  .waving-boy {
+    width: 30px;
+    height: 30px;
+  }
+
+  .waving-girl {
+    right: -40px;
+  }
+
+  .waving-boy {
+    left: -40px;
+  }
+}
+
+/* 平板版樣式 (768px 到 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  body {
+    padding: 1.5rem;
+  }
+
+  .container {
+    max-width: 500px;
+    padding: 1.5rem;
+  }
+
+  .container h1 {
+    font-size: 1.8rem;
+  }
+
+  .container p {
+    font-size: 1rem;
+  }
+
+  .container button {
+    padding: 0.9rem 1.8rem;
+    font-size: 1.05rem;
+  }
+
+  .waving-girl,
+  .waving-boy {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+/* 電腦版樣式 (大於 1024px) */
+@media screen and (min-width: 1025px) {
+  body {
+    padding: 2rem;
+  }
+
+  .container {
+    max-width: 600px;
+    padding: 2rem;
+  }
+
+  .container h1 {
+    font-size: 2rem;
+  }
+
+  .container p {
+    font-size: 1.1rem;
+  }
+
+  .container button {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+  }
+
+  .waving-girl,
+  .waving-boy {
+    width: 40px;
+    height: 40px;
+  }
+}
