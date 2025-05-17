@@ -279,11 +279,11 @@
         <div class="compatibility">
           <div class="compatibility-section">
             <h4>💕 最適合的配對</h4>
-            <img src="${result.match.split(' - ')[0].split(' ')[1] === '蜜糖舒芙蕾' ? 'images/honey_souffle.jpg' : 
-                      result.match.split(' - ')[0].split(' ')[1] === '甜甜圈男孩' ? 'images/donut.jpg' :
-                      result.match.split(' - ')[0].split(' ')[1] === '苦甜可可磚' ? 'images/chocolate_brick.jpg' :
-                      result.match.split(' - ')[0].split(' ')[1] === '牛奶布丁' ? 'images/pudding.jpg' :
-                      result.match.split(' - ')[0].split(' ')[1] === '棉花糖泡泡' ? 'images/cotton_candy.jpg' :
+            <img src="${result.match.split(' - ')[0].includes('蜜糖舒芙蕾') ? 'images/honey_souffle.jpg' : 
+                      result.match.split(' - ')[0].includes('甜甜圈男孩') ? 'images/donut.jpg' :
+                      result.match.split(' - ')[0].includes('苦甜可可磚') ? 'images/chocolate_brick.jpg' :
+                      result.match.split(' - ')[0].includes('牛奶布丁') ? 'images/pudding.jpg' :
+                      result.match.split(' - ')[0].includes('棉花糖泡泡') ? 'images/cotton_candy.jpg' :
                       'images/apple_pie.jpg'}" 
                  alt="${result.match.split(' - ')[0]}" 
                  class="match-image">
@@ -294,11 +294,11 @@
           </div>
           <div class="compatibility-section">
             <h4>⚠️ 需要多溝通的配對</h4>
-            <img src="${result.notMatch.split(' - ')[0].split(' ')[1] === '蜜糖舒芙蕾' ? 'images/honey_souffle.jpg' : 
-                      result.notMatch.split(' - ')[0].split(' ')[1] === '甜甜圈男孩' ? 'images/donut.jpg' :
-                      result.notMatch.split(' - ')[0].split(' ')[1] === '苦甜可可磚' ? 'images/chocolate_brick.jpg' :
-                      result.notMatch.split(' - ')[0].split(' ')[1] === '牛奶布丁' ? 'images/pudding.jpg' :
-                      result.notMatch.split(' - ')[0].split(' ')[1] === '棉花糖泡泡' ? 'images/cotton_candy.jpg' :
+            <img src="${result.notMatch.split(' - ')[0].includes('蜜糖舒芙蕾') ? 'images/honey_souffle.jpg' : 
+                      result.notMatch.split(' - ')[0].includes('甜甜圈男孩') ? 'images/donut.jpg' :
+                      result.notMatch.split(' - ')[0].includes('苦甜可可磚') ? 'images/chocolate_brick.jpg' :
+                      result.notMatch.split(' - ')[0].includes('牛奶布丁') ? 'images/pudding.jpg' :
+                      result.notMatch.split(' - ')[0].includes('棉花糖泡泡') ? 'images/cotton_candy.jpg' :
                       'images/apple_pie.jpg'}" 
                  alt="${result.notMatch.split(' - ')[0]}" 
                  class="match-image">

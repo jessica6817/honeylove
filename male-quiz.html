@@ -271,10 +271,10 @@
         <div class="compatibility">
           <div class="compatibility-section">
             <h4>💕 最適合的配對</h4>
-            <img src="${result.match.split(' - ')[0].split(' ')[1] === '草莓奶油卷' ? 'images/strawberry_roll.jpg' : 
-                      result.match.split(' - ')[0].split(' ')[1] === '棉花糖泡泡' ? 'images/cotton_candy.jpg' :
-                      result.match.split(' - ')[0].split(' ')[1] === '黑巧克力塔' ? 'images/chocolate_tart.jpg' :
-                      result.match.split(' - ')[0].split(' ')[1] === '曲奇餅乾' ? 'images/cookie.jpg' :
+            <img src="${result.match.split(' - ')[0].includes('草莓奶油卷') ? 'images/strawberry_roll.jpg' : 
+                      result.match.split(' - ')[0].includes('棉花糖泡泡') ? 'images/cotton_candy.jpg' :
+                      result.match.split(' - ')[0].includes('黑巧克力塔') ? 'images/chocolate_tart.jpg' :
+                      result.match.split(' - ')[0].includes('曲奇餅乾') ? 'images/cookie.jpg' :
                       'images/matcha_cake.jpg'}" 
                  alt="${result.match.split(' - ')[0]}" 
                  class="match-image">
@@ -285,10 +285,10 @@
           </div>
           <div class="compatibility-section">
             <h4>⚠️ 需要多溝通的配對</h4>
-            <img src="${result.notMatch.split(' - ')[0].split(' ')[1] === '草莓奶油卷' ? 'images/strawberry_roll.jpg' : 
-                      result.notMatch.split(' - ')[0].split(' ')[1] === '棉花糖泡泡' ? 'images/cotton_candy.jpg' :
-                      result.notMatch.split(' - ')[0].split(' ')[1] === '黑巧克力塔' ? 'images/chocolate_tart.jpg' :
-                      result.notMatch.split(' - ')[0].split(' ')[1] === '曲奇餅乾' ? 'images/cookie.jpg' :
+            <img src="${result.notMatch.split(' - ')[0].includes('草莓奶油卷') ? 'images/strawberry_roll.jpg' : 
+                      result.notMatch.split(' - ')[0].includes('棉花糖泡泡') ? 'images/cotton_candy.jpg' :
+                      result.notMatch.split(' - ')[0].includes('黑巧克力塔') ? 'images/chocolate_tart.jpg' :
+                      result.notMatch.split(' - ')[0].includes('曲奇餅乾') ? 'images/cookie.jpg' :
                       'images/matcha_cake.jpg'}" 
                  alt="${result.notMatch.split(' - ')[0]}" 
                  class="match-image">
